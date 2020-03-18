@@ -1,5 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 class WorldTime {
   String location;
@@ -25,10 +26,10 @@ class WorldTime {
       String offset_m = data['utc_offset'].substring(4);
 
       DateTime now = DateTime.parse(datetime);
-      now = now.add(
-          Duration(hours: int.parse(offset_h), minutes: int.parse(offset_m)));
+      now = now.add(Duration(hours: int.parse(offset_h), minutes: int.parse(offset_m)));
 
-      time = now.toString();
+      // convert long date string to small string
+      time = DateFormat.jm().format(now);
     }catch(e){
       print("WorldTime error : $e");
       time = 'cound not get data';

@@ -53,10 +53,16 @@ class _LoadingState extends State<Loading> {
   void loadWordTime() async{
     WorldTime time = WorldTime(location: 'colombo', flag: 'colombo.png', url: 'Asia/Colombo');
     await time.getTime();
-    print('current time : '+time.time);
+    //print('current time : '+time.time);
     // update the UI with new values
-    setState(() {
+    /*setState(() {
       timeNow = time.time;
+    });*/
+    // open home page with sending data to home page
+    Navigator.pushReplacementNamed(context, '/home',arguments: {
+      'location' : time.location,
+      'flag' : time.flag,
+      'time' : time.time,
     });
   }
 
