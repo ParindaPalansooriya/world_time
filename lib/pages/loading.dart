@@ -52,8 +52,8 @@ class _LoadingState extends State<Loading> {
   }*/
 
   void loadWordTime() async{
-    WorldTime time = WorldTime(location: 'colombo', flag: 'colombo.png', url: 'Asia/Colombo');
-    await time.getTime();
+    WorldTime time = WorldTime(location: 'Colombo', flag: 'sl.png', url: 'Asia/Colombo');
+    await time.getTime(context);
     //print('current time : '+time.time);
     // update the UI with new values
     /*setState(() {

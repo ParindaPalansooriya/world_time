@@ -11,8 +11,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
-    dataFromLoging = ModalRoute.of(context).settings.arguments;
+    // check dataFromLoging is empty.
+    dataFromLoging = dataFromLoging.isNotEmpty ? dataFromLoging : ModalRoute.of(context).settings.arguments;
     print(dataFromLoging);
 
     // check background image
@@ -37,8 +37,18 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   FlatButton.icon(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/location");
+                      onPressed: () async{
+                        // open location and waiting for return to page with using "async and await"
+                        dynamic resal = await Navigator.pushNamed(context, "/location");
+                        setState(() {
+                          dataFromLoging = {
+                            'location' : resal['location'],
+                            'flag' : resal['flag'],
+                            'time' : resal['time'],
+                            'isDayTime' : resal['isDayTime'],
+                            'url' : resal['url'],
+                          };
+                        });
                       },
                       icon: Icon(
                         Icons.edit_location,
