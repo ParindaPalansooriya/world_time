@@ -7,6 +7,7 @@ class WorldTime {
   String time;
   String flag;
   String url;
+  bool isDayTime;
 
   //make constructor
   WorldTime({ this.url, this.flag, this.location});
@@ -30,6 +31,7 @@ class WorldTime {
 
       // convert long date string to small string
       time = DateFormat.jm().format(now);
+      isDayTime = now.hour > 6 && now.hour < 18 ? true : false; // if 6 < time < 18 true else false
     }catch(e){
       print("WorldTime error : $e");
       time = 'cound not get data';

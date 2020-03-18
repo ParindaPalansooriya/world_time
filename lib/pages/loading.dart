@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 /*import 'package:http/http.dart';
 import 'dart:convert';*/
 import 'package:worldtime/services/WorldTime.dart';
@@ -63,6 +64,7 @@ class _LoadingState extends State<Loading> {
       'location' : time.location,
       'flag' : time.flag,
       'time' : time.time,
+      'isDayTime' : time.isDayTime,
     });
   }
 
@@ -77,9 +79,11 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(50.0),
-        child: Text(timeNow),
+      body: Center(
+        child: SpinKitThreeBounce(
+          color: Colors.blue[900],
+          size: 20.0,
+        ),
       ),
     );
   }

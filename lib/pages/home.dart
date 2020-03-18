@@ -15,41 +15,60 @@ class _HomeState extends State<Home> {
     dataFromLoging = ModalRoute.of(context).settings.arguments;
     print(dataFromLoging);
 
-    return Scaffold(//"SafeArea" this will show the all in safe area
-      body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
-            child: Column(
-              children: <Widget>[
-                FlatButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/location");
-                    },
-                    icon: Icon(Icons.edit_location),
-                    label: Text('Edit Location')),
-                SizedBox(height: 20.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      dataFromLoging['location'],
-                      style: TextStyle(
-                        fontSize: 28.0,
-                        letterSpacing: 2.0,
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 20.0),
-                Text(
-                  dataFromLoging['time'],
-                  style: TextStyle(
-                    fontSize: 66.0,
+    // check background image
+    String backImage = dataFromLoging['isDayTime'] ? 'day.jpg' : 'night.jpg';
+    // check background color ( tool bar color)
+    Color backColor = dataFromLoging['isDayTime'] ? Colors.deepOrange[900] : Colors.blue[900];
+    // check font color
+    Color fontColor = dataFromLoging['isDayTime'] ? Colors.black : Colors.white;
 
+    return Scaffold(//"SafeArea" this will show the all in safe area
+      backgroundColor: backColor,
+      body: SafeArea(
+          child: Container(
+            decoration: BoxDecoration( // make a box to add background
+              image: DecorationImage(
+                image: AssetImage('assest/$backImage'),
+                fit: BoxFit.cover,
+              )
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
+              child: Column(
+                children: <Widget>[
+                  FlatButton.icon(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/location");
+                      },
+                      icon: Icon(
+                        Icons.edit_location,
+                        color: fontColor),
+                      label: Text('Edit Location'),
+                      textColor: fontColor),
+                  SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        dataFromLoging['location'],
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          letterSpacing: 2.0,
+                          color: fontColor
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                  SizedBox(height: 20.0),
+                  Text(
+                    dataFromLoging['time'],
+                    style: TextStyle(
+                      fontSize: 66.0,
+                    ),
+                  )
+                ],
       ),
+            ),
           )),
     );
   }
